@@ -10,6 +10,8 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
 
     const sliderContainerRef: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 
+
+    const clickStartedPx: MutableRefObject<number | null> = useRef(null);
     const touchStartedPx: MutableRefObject<number | null> = useRef(null);
 
     const currentSlideIdx = useRef<number>(0);
@@ -88,22 +90,40 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
     }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLUListElement>) => {
-        touchStartedPx.current = e.clientX;
+        clickStartedPx.current = e.clientX;
     }
 
     const handleMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
-        if (touchStartedPx.current === null) return;
-        console.log('move');
+        if (clickStartedPx.current === null) return;
         const newTouchPx = e.clientX;
-        if (newTouchPx - touchStartedPx.current! > 100) {
+        if (newTouchPx - clickStartedPx.current! > 100) {
+            clickStartedPx.current = null;
+            setPrevSlider();
+        }
+        if (clickStartedPx.current! - newTouchPx  > 100) {
+            clickStartedPx.current = null;
+            setNextSlider();
+        }
+    }
+
+    const handleTouchStart = (e: React.TouchEvent<HTMLUListElement>) => {
+        touchStartedPx.current = e.touches[0].clientX;
+    }
+
+    const handleTouchMove = (e: React.TouchEvent<HTMLUListElement>) => {
+        if (touchStartedPx.current === null) return;
+        const newTouchPx = e.touches[0].clientX;
+        if (newTouchPx - touchStartedPx.current! > 50) {
             touchStartedPx.current = null;
             setPrevSlider();
         }
-        if (touchStartedPx.current! - newTouchPx  > 100) {
+        if (touchStartedPx.current! - newTouchPx  > 50) {
             touchStartedPx.current = null;
             setNextSlider();
         }
     }
+
+
 
     useEffect(() => {
         const interval = setInterval(setNextSlider, props.intervalMs || 1000);
@@ -118,6 +138,9 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
             <ul className={styles.imgsContainer}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
+
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
                 style={{
                     left: leftIndent
                 }}
