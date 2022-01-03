@@ -43,6 +43,7 @@ const TVReview: React.FC<ITVReviewProps> = (props: ITVReviewProps) => {
                             <Image
                                 src={imgPath}
                                 layout="fill"
+                                alt="photo"
                             />
                         </div>
                     </div>

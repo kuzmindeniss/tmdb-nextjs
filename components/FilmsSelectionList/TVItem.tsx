@@ -13,7 +13,7 @@ const TVItem: React.FC<ITVItemProps> = (props: ITVItemProps) => {
         <li className={styles.item}>
             <Link href={`/tv/${id}`}>
                 <a className={styles.imageWrapper}>
-                    <Image className={styles.itemImage} src={photoSrc} layout="fill"/>
+                    <Image className={styles.itemImage} src={photoSrc} layout="fill" alt="photo"/>
                 </a>
             </Link>
             <Link href={`/tv/${id}`}>

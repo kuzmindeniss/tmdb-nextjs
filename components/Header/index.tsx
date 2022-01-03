@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             <form className={styles.searchForm} onSubmit={searchSubmit}>
                 <input className={styles.searchInput} type="text" name="search" placeholder="Поиск" onChange={changeSearchForm} value={searchQueryValue}/>
                 <button className={styles.searchButton}>
-                    <Image src={searchSvgPath} width={18} height={18} />
+                    <Image src={searchSvgPath} width={18} height={18}alt="search"/>
                 </button>
             </form>
         </div>
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                 <div className={styles.left}>
                     <Link href="/">
                         <a className={styles.logoWrapper}>
-                            <Image src={logoPath} width={154} height={20} />
+                            <Image src={logoPath} width={154} height={20} alt="logo"/>
                         </a>
                     </Link>
                 </div>

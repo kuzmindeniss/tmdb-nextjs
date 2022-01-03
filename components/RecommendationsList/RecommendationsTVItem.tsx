@@ -15,7 +15,7 @@ const RecommendationsMovieItem: React.FC<IRecommendationsTVItemProps> = (props: 
         <li className={styles.item}>
             <Link href={href}>
                 <a className={styles.imageWrapper}>
-                    <Image className={styles.itemImage} src={photoSrc} layout="fill"/>
+                    <Image className={styles.itemImage} src={photoSrc} layout="fill" alt="photo"/>
                 </a>
             </Link>
             <div className={styles.itemBottom}>

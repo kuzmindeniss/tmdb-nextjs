@@ -23,7 +23,7 @@ const PopularPeopleList: React.FC<IPopularPeopleListProps> = (props: IPopularPeo
             return <li key={id} className={styles.item}>
                 <Link href={`/person/${id}`}>
                     <a className={styles.imageWrapper}>
-                        <Image src={imgPath} layout="fill"/>
+                        <Image src={imgPath} layout="fill" alt="photo"/>
                     </a>
                 </Link>
                 <Link href={`/person/${id}`}>

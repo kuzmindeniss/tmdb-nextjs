@@ -46,6 +46,7 @@ const MovieReview: React.FC<IMovieReviewProps> = (props: IMovieReviewProps) => {
                                 layout="fill"
                                 placeholder="blur"
                                 blurDataURL={placeholderBASE64}
+                                alt="photo"
                             />
                         </div>
                     </div>

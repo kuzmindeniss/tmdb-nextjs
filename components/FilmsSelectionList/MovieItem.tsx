@@ -13,7 +13,7 @@ const MovieItem: React.FC<IMovieItemProps> = (props: IMovieItemProps) => {
         <li className={styles.item}>
             <Link href={`/movie/${id}`}>
                 <a className={styles.imageWrapper}>
-                    <Image className={styles.itemImage} src={photoSrc} layout="fill"/>
+                    <Image className={styles.itemImage} src={photoSrc} layout="fill" alt="photo"/>
                 </a>
             </Link>
             <Link href={`/movie/${id}`}>

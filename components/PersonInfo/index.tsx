@@ -50,7 +50,7 @@ const PersonInfo: React.FC<IPersonInfoProps> = (props: IPersonInfoProps) => {
     return (<div className={styles.container}>
         <div className={styles.leftContainer}>
             <div className={styles.photoWrapper}>
-                <Image src={photoPath} layout="fill"/>
+                <Image src={photoPath} layout="fill" alt="photo"/>
             </div>
             {/* <div className={styles.socialLinks}>
 

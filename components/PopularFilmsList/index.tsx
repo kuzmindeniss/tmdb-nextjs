@@ -21,7 +21,7 @@ const PopularFilmsList: React.FC<IPopularFilmsListProps> = (props: IPopularFilms
             return <li className={styles.item} key={id}>
                 <Link href={href}>
                     <a className={styles.imgWrapper}>
-                        <Image src={imgHref} layout="fill"/>
+                        <Image src={imgHref} layout="fill" alt="photo"/>
                         <div className={styles.userChartContainer}>
                             <UserChart small percent={percent} />
                         </div>
