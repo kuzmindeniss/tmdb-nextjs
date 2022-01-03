@@ -111,12 +111,13 @@
     flex-wrap: nowrap;
     gap: 10px;
     justify-content: center;
+    margin: 0;
     width: 100%;
     left: 0;
     bottom: 20px;
 
-    @media (max-width: 700) {
-        bottom: 8px;
+    @media (max-width: 700px) {
+        display: none;
     }
 }
 
