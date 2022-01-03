@@ -120,10 +120,12 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
         if (newTouchPx - touchStartedPx.current! > 50) {
             touchStartedPx.current = null;
             setPrevSlider();
+            resetInterval();
         }
         if (touchStartedPx.current! - newTouchPx  > 50) {
             touchStartedPx.current = null;
             setNextSlider();
+            resetInterval();
         }
     }
 
