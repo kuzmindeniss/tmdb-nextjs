@@ -3,7 +3,7 @@ import styles from './FilmsSearchList.module.scss'
 import Item from './Item';
 import { IListUlProps } from './types';
 
-const ListUl: React.FC<IListUlProps> = React.forwardRef<HTMLUListElement, IListUlProps>(function ListUlForward(props: IListUlProps, ref) {
+const ListUl = React.forwardRef<HTMLUListElement, IListUlProps>(function ListUlForward(props: IListUlProps, ref) {
     const getItems = (): JSX.Element[] => {
         const items: JSX.Element[] = props.data.map((item, idx) => {
             return <Item item={item} type={props.type} key={item.id}/>

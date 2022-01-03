@@ -92,7 +92,7 @@ const FilmsSearchList: React.FC<IFilmsSearchList> = (props: IFilmsSearchList) =>
                 currentListSlug: "movies",
             }));
         }
-    });
+    }, [router.query.q, props.initialData, props.initialType]);
 
     return (
         <div className={styles.container}>
