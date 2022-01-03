@@ -10,6 +10,7 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
 
     const sliderContainerRef: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 
+    const sliderInterval: MutableRefObject<NodeJS.Timer | null> = useRef(null);
 
     const clickStartedPx: MutableRefObject<number | null> = useRef(null);
     const touchStartedPx: MutableRefObject<number | null> = useRef(null);
@@ -63,6 +64,7 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
                     onClick={() => {
                         currentSlideIdx.current = index;
                         recalculateLeftIndent();
+                        resetInterval();
                     }}
                 ></li>
             )
@@ -99,10 +101,12 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
         if (newTouchPx - clickStartedPx.current! > 100) {
             clickStartedPx.current = null;
             setPrevSlider();
+            resetInterval();
         }
         if (clickStartedPx.current! - newTouchPx  > 100) {
             clickStartedPx.current = null;
             setNextSlider();
+            resetInterval();
         }
     }
 
@@ -123,15 +127,25 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
         }
     }
 
+    const setSliderInterval = () => {
+        sliderInterval.current = setInterval(setNextSlider, props.intervalMs || 1000);
+    }
 
+    const resetInterval = () => {
+        if (sliderInterval.current === null) return;
+        clearInterval(sliderInterval.current);
+        sliderInterval.current = null;
+        sliderInterval.current = setInterval(setNextSlider, props.intervalMs || 1000);
+    }
 
     useEffect(() => {
-        const interval = setInterval(setNextSlider, props.intervalMs || 1000);
+        setSliderInterval();
 
         return () => {
-            clearInterval(interval);
+            clearInterval(sliderInterval.current!);
+            sliderInterval.current = null;
         }
-    }, [props.intervalMs])
+    }, [])
 
     return (
         <div className={styles.container} ref={sliderContainerRefChanged} style={{height: getSliderHeight()}}>
