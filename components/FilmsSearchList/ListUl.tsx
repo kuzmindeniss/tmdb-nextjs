@@ -64,6 +64,5 @@ const ListUl = React.forwardRef<HTMLUListElement, IListUlProps>(
     }
 );
 
-ListUl.displayName = 'ListUl';
 
 export default ListUl;

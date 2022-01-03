@@ -85,7 +85,7 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
         return () => {
             clearInterval(interval);
         }
-    }, [props.intervalMs, setNextSlider])
+    }, [props.intervalMs])
 
     return (
         <div className={styles.container} ref={sliderContainerRefChanged} style={{height: getSliderHeight()}}>

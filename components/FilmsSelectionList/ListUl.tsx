@@ -3,7 +3,7 @@ import { IFilmsListUlProps } from './types';
 import Item from './Item';
 import styles from './FilmsSelectionList.module.scss';
 
-const ListUl: React.FC<IFilmsListUlProps> = React.forwardRef<HTMLUListElement, IFilmsListUlProps>((props: IFilmsListUlProps, ref) => {
+const ListUl: React.FC<IFilmsListUlProps> = React.forwardRef<HTMLUListElement, IFilmsListUlProps>(function forwListUl(props: IFilmsListUlProps, ref){
     const defaultStyle = {
         transition: `all ${props.animationDuration}ms ease-in-out`,
         opacity: 0,
