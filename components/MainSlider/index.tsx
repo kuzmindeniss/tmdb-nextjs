@@ -7,9 +7,10 @@ import { throttle } from 'lodash';
 
 const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
     const [sliderWidth, setSliderWidth] = useState<string>('');
-    // const maxWidth = 1000;
 
     const sliderContainerRef: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+
+    const touchStartedPx: MutableRefObject<number | null> = useRef(null);
 
     const currentSlideIdx = useRef<number>(0);
     const [leftIndent, setLeftIndent] = useState<string>('');
@@ -79,6 +80,31 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
         recalculateLeftIndent();
     };
 
+    const setPrevSlider = (): void => {
+        let newSlideIdx = currentSlideIdx.current - 1;
+        if (newSlideIdx < 0) newSlideIdx = props.items.length - 1;
+        currentSlideIdx.current = newSlideIdx;
+        recalculateLeftIndent();
+    }
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLUListElement>) => {
+        touchStartedPx.current = e.clientX;
+    }
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
+        if (touchStartedPx.current === null) return;
+        console.log('move');
+        const newTouchPx = e.clientX;
+        if (newTouchPx - touchStartedPx.current! > 100) {
+            touchStartedPx.current = null;
+            setPrevSlider();
+        }
+        if (touchStartedPx.current! - newTouchPx  > 100) {
+            touchStartedPx.current = null;
+            setNextSlider();
+        }
+    }
+
     useEffect(() => {
         const interval = setInterval(setNextSlider, props.intervalMs || 1000);
 
@@ -90,6 +116,8 @@ const MainSlider: React.FC<IMainSliderProps> = (props: IMainSliderProps) => {
     return (
         <div className={styles.container} ref={sliderContainerRefChanged} style={{height: getSliderHeight()}}>
             <ul className={styles.imgsContainer}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
                 style={{
                     left: leftIndent
                 }}
