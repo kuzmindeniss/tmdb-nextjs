@@ -3,6 +3,7 @@ import PersonInfo from "components/PersonInfo";
 import PopularPeopleList from "components/PopularPeopleList";
 import { IPopularPeopleObject } from "components/PopularPeopleList/types";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import Head from "next/head";
 import { TMDBErrorObject } from "types";
 
 const Person: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -11,6 +12,9 @@ const Person: NextPage = (props: InferGetServerSidePropsType<typeof getServerSid
     </LayoutError>
 
     return (<LayoutContent>
+        <Head>
+            <title>Популярные актеры</title>
+        </Head>
         <PopularPeopleList popularObj={props.peopleObj}/>
     </LayoutContent>)
 }

@@ -3,7 +3,8 @@ import { LayoutContent, LayoutError } from "components/Layout";
 import RecommendationsList from "components/RecommendationsList";
 import MovieReview from "components/Review/Movie";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
-import { IDataDetailedMovie } from "types";
+import Head from "next/head";
+import { IDataDetailedMovie, IDataMovie } from "types";
 
 const Movie: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     if (props.error) return (
@@ -13,6 +14,9 @@ const Movie: NextPage = (props: InferGetServerSidePropsType<typeof getServerSide
     )
     
     return (<>
+        <Head>
+            <title>{(props.movie as IDataMovie).title || 'Фильм'}</title>
+        </Head>
         <MovieReview item={props.movie}/>
         <LayoutContent>
             <RecommendationsList data={props.recommendations} type="movie"/>

@@ -4,6 +4,7 @@ import PopularFilmsList from "components/PopularFilmsList";
 import { IPopularFilmsObject } from "components/PopularFilmsList/types";
 import { IPopularPeopleObject } from "components/PopularPeopleList/types";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import Head from "next/head";
 import { TMDBErrorObject } from "types";
 
 const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -14,6 +15,9 @@ const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSidePro
     </LayoutError>
 
     return (<LayoutContent>
+        <Head>
+            <title>Популярные серилы</title>
+        </Head>
         <PopularFilmsList type="tv" filmsObj={props.tvsObj} />
     </LayoutContent>)
 }

@@ -3,7 +3,8 @@ import { LayoutContent, LayoutError } from "components/Layout";
 import RecommendationsList from "components/RecommendationsList";
 import TVReview from "components/Review/TV";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
-import { IDataDetailedMovie } from "types";
+import Head from "next/head";
+import { IDataDetailedMovie, IDataTV } from "types";
 
 const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
@@ -14,6 +15,9 @@ const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSidePro
     )
 
     return (<>
+        <Head>
+            <title>{(props.tv as IDataTV).name || 'Сериал'}</title>
+        </Head>
         <TVReview item={props.tv}/>
         <LayoutContent>
             <RecommendationsList data={props.recommendations} type="tv"/>

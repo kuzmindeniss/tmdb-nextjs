@@ -1,11 +1,15 @@
 import FilmsSearchList from "components/FilmsSearchList";
 import { LayoutContent } from "components/Layout";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import Head from "next/head";
 import { IDataMovie } from "types";
 
 const Search: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
     return (<LayoutContent>
+        <Head>
+            <title>Поиск</title>
+        </Head>
         <FilmsSearchList initialType="movie" initialData={props.movies}/>
     </LayoutContent>)
 }

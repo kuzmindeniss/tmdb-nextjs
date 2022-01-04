@@ -4,6 +4,7 @@ import PersonInfo from "components/PersonInfo";
 import RecommendationsList from "components/RecommendationsList";
 import MovieReview from "components/Review/Movie";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import Head from "next/head";
 import { IDataActor, IDataDetailedMovie } from "types";
 
 const Person: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -14,6 +15,9 @@ const Person: NextPage = (props: InferGetServerSidePropsType<typeof getServerSid
     )
 
     return (<LayoutContent>
+        <Head>
+            <title>{(props.actor as IDataActor).name || 'Актер'}</title>
+        </Head>
         <PersonInfo item={props.actor} tvCredits={props.tvCredits} movieCredits={props.movieCredits}/>
     </LayoutContent>)
 }

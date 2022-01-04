@@ -3,6 +3,7 @@ import MainSlider from 'components/MainSlider'
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { ISliderItem } from 'components/MainSlider/types';
 import { LayoutContent } from 'components/Layout';
+import Head from 'next/head';
 
 const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const sliderData: ISliderItem[] = [
@@ -28,6 +29,9 @@ const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideP
 
 
     return (<LayoutContent>
+        <Head>
+            <title>Главная</title>
+        </Head>
         <MainSlider items={sliderData} intervalMs={10000} sizes={{ height: 675, width: 1200 }} />
         <FilmsSelectionList data={props.movies} firstSelectionType="tvs-popular-online" type="tv" selectionTypes={["tvs-popular-online", "tvs-popular-forrent", "tvs-popular-ontv"]} />
     </LayoutContent>)
