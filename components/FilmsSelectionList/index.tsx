@@ -8,6 +8,7 @@ import classNames from 'classnames';
 
 
 const FilmsList: React.FC<IFilmsListProps> = (props: IFilmsListProps) => {
+    console.log(props);
     const [listState, setListState] = useState<{
         listData: Array<ContentDataType>,
         listType: ContentTypes,

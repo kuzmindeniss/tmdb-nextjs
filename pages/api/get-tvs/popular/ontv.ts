@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IDataMovie, IDataTV } from 'types';
+import { IDataTV } from 'types';
 import { getUrl } from 'utils';
 
 type Data = IDataTV[];
@@ -18,7 +18,7 @@ export default async function handler(
     const tvsRaw = await fetch(getUrl(url, options));
     let tvs: IDataTV[];
     try {
-        tvs = await tvsRaw.json();
+        tvs = (await tvsRaw.json()).results;
     } catch (e) {
         tvs = [];
     }

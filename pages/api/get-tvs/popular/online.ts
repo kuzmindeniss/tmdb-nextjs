@@ -18,10 +18,12 @@ export default async function handler(
     const tvsRaw = await fetch(getUrl(url, options));
     let tvs: IDataTV[];
     try {
-        tvs = await tvsRaw.json();
+        tvs = (await tvsRaw.json()).results;
     } catch (e) {
         tvs = [];
     }
+    // console.log('tvs-tvs-tvs-tvs-tvs');
 
+    // console.log(tvs);
     res.status(200).json(tvs)
 }

@@ -8,8 +8,6 @@ import Head from "next/head";
 import { TMDBErrorObject } from "types";
 
 const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    console.log(props.tvsObj);
-
     if (props.error) return <LayoutError>
         {props.error}
     </LayoutError>
@@ -26,10 +24,14 @@ const TV: NextPage = (props: InferGetServerSidePropsType<typeof getServerSidePro
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query.page || "1";
     const movieRaw = await fetch(`${process.env.URL}/api/get/tv/popular/` + page);
-    const tvsObj: IPopularFilmsObject | TMDBErrorObject = await movieRaw.json();
-    console.log(tvsObj);
+    let tvsObj: IPopularFilmsObject | TMDBErrorObject | null;
+    try {
+        tvsObj = await movieRaw.json();
+    } catch (e) {
+        tvsObj = null;
+    }
 
-    if ((tvsObj as TMDBErrorObject).errors) return {
+    if (tvsObj !== null && (tvsObj as TMDBErrorObject).errors) return {
         props: {
             error: (tvsObj as TMDBErrorObject).errors[0]
         }

@@ -19,7 +19,7 @@ export default async function handler(
 
     let tvs: IDataTV[];
     try {
-        tvs = await tvsRaw.json();
+        tvs = (await tvsRaw.json()).results;
     } catch (e) {
         tvs = [];
     }

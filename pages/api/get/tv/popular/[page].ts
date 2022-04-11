@@ -3,7 +3,7 @@ import { IPopularPeopleObject } from 'components/PopularPeopleList/types';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getUrl } from 'utils';
 
-type Data = IPopularPeopleObject;
+type Data = IPopularPeopleObject | null;
 
 export default async function handler(
     req: NextApiRequest,
@@ -18,7 +18,13 @@ export default async function handler(
     };
 
     const tvRaw = await fetch(getUrl(url, options));
-    const tvObj = await tvRaw.json() as IPopularPeopleObject;
+    // const tvObj = await tvRaw.json() as IPopularPeopleObject;
+    let tvObj: IPopularPeopleObject | null;
+    try {
+        tvObj = await tvRaw.json();
+    } catch (e) {
+        tvObj = null;
+    }
 
     res.status(200).json(tvObj)
 }
