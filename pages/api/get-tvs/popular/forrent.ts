@@ -16,7 +16,13 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     const tvsRaw = await fetch(getUrl(url, options));
-    const tvs: IDataTV[] = (await tvsRaw.json()).results as IDataTV[];
+
+    let tvs: IDataTV[];
+    try {
+        tvs = await tvsRaw.json();
+    } catch (e) {
+        tvs = [];
+    }
 
     res.status(200).json(tvs)
 }

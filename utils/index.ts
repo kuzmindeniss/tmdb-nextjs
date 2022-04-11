@@ -22,3 +22,12 @@ export const formatDate = (dateString: string): string => {
         day: 'numeric',
     }).replace(/\s*г\.$/, "");
 }
+
+function isJsonString(str: string) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}

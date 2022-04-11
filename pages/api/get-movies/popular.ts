@@ -17,7 +17,12 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     const moviesRaw = await fetch(getUrl(url, options));
-    const movies: IDataMovie[] = (await moviesRaw.json()).results as IDataMovie[];
+    let movies: IDataMovie[];
+    try {
+        movies = await moviesRaw.json();
+    } catch (e) {
+        movies = [];
+    }
 
     res.status(200).json(movies)
 }
