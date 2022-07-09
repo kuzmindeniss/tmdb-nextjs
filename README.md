@@ -2,4 +2,4 @@
 
 ## https://tmdb-nextjs-tau.vercel.app/
 
-![screenshot](https://i.ibb.co/5sHRD8w/tmdb.png)
+![screenshot](https://i.ibb.co/5jZ6ZYC/tmdb.png)
