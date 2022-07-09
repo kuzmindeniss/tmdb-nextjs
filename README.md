@@ -1,4 +1,4 @@
-# Next.js app to search for movies, actors and TV shows
+# Next.js app using TMDB API to search for movies, actors and TV shows
 
 ## https://tmdb-nextjs-tau.vercel.app/
 
